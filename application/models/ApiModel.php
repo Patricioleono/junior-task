@@ -19,9 +19,9 @@ class ApiModel extends CI_Model {
 	public function insertData($dataPersonal, $logData)
 	{
 		$this->db->insert('registrousuarios', $dataPersonal);
-		$result = $this->db->insert('login', $logData);
-		$rows = $result->num_rows();
-		if($rows > 0){
+		$this->db->insert('login', $logData);
+		$result = $this->db->affected_rows();
+		if($result > 0){
 			return true;
 		}else{
 			return false;
@@ -42,10 +42,13 @@ class ApiModel extends CI_Model {
 		}
 	}
 
-	public function onlyOne($id)
+	public function login($correoPass)
 	{
-		$this->db->where('id', $id);
-		$result = $this->db->get('registrousuarios');
+		$this->db->where('log_user', $correoPass['log_user']);
+		$this->db->where('log_pass', $correoPass['log_pass']);
+		$this->db->from('login');
+		$this->db->select('*');
+		$result = $this->db->get();
 
 		return $result->result_array();
 	}

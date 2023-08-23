@@ -14,12 +14,40 @@
 				<label for="floatingPassword">Contraseña</label>
 			</div>
 
-			<button class="btn btn-primary w-100 py-2 mb-2" type="submit">Ingresar</button>
+			<button class="btn btn-primary w-100 py-2 mb-2" id="login">Ingresar</button>
 			<a class="btn btn-primary w-100 py-2" href="<?= site_url('register'); ?>">Crear Nueva Cuenta</a>
 		</form>
 	</div>
 </div>
 
+
+<script type="application/javascript">
+	$(document).ready(function() {
+
+		$("#login").click(function (e) {
+			e.preventDefault();
+
+			let correoLogin = $("#floatingInput").val();
+			let passwordLogin = $("#floatingPassword").val();
+
+			$.ajax({
+				url: "<?php echo base_url(); ?>ApiMiddle/loginUser",
+				method: "POST",
+				data: {
+					correoLogin: correoLogin,
+					passwordLogin: passwordLogin,
+					flag: loginUser
+				},
+				dataType: "JSON",
+				success: function(returnData){
+					console.log(returnData)
+
+				}
+			})
+		})
+
+	});
+</script>
 
 <?php $this->load->view('Layout/__footer'); ?>
 

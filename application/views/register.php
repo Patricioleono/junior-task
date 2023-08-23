@@ -51,7 +51,7 @@
 			let password = $('#password').val();
 
 			$.ajax({
-				url: "<?php echo base_url(); ?>ApiMiddle/nuevoUser",
+				url: "<?php echo base_url(); ?>ApiMiddle/loginUser",
 				method: "POST",
 				data: {
 					nombre: nombre,
@@ -60,14 +60,15 @@
 					correo: correo,
 					telefono: telefono,
 					password: password,
-					flag: nuevoIngreso
+					flag: loginUser
 				},
 				dataType: "JSON",
 				success: function(returnData){
 					console.log(returnData)
+					//redireccionar al inicio
 				}
-			})
-		})
+			});
+		});
 
 	});
 </script>

@@ -88,6 +88,29 @@ class Api extends CI_Controller {
 		}
 	}
 
+	public function login(){
+		$logData = array(
+			'log_user' => $_POST['log_user'],
+			'log_pass' => $_POST['log_pass']);
+		$result = $this->api->login($logData);
+
+		if(count($result) > 0){
+			$response = array(
+				'status' => 'Success',
+				'code' => 200,
+				'message' => 'Acceso habilitado'
+			);
+		}else{
+			$response = array(
+				'status' => 'Error',
+				'code' => 400,
+				'message' => 'error en credenciales ingrese denuevo'
+			);
+		}
+		var_dump($response);
+		//echo json_encode($response);
+	}
+
 	public function updateData()
 	{
 		$dataPersonal = array(

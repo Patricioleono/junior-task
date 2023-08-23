@@ -40,4 +40,20 @@ class ApiMiddle extends CI_Controller
 
 		}
 	}
+
+	public function loginUser(){
+		$tipo = $this->input->post('flag');
+		if($tipo){
+			$dataLogin = array(
+				'log_user' => $this->input->post('correoLogin'),
+				'log_pass' => $this->input->post('passwordLogin')
+			);
+			$url = "http://localhost/patricio_leon/Api/login";
+			$result = $this->curlUrl($url, $dataLogin);
+
+			echo json_encode($result);
+
+
+		}
+	}
 }
